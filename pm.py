@@ -4,12 +4,28 @@ from peewee import *
 from hashlib import sha256
 from random import *
 from playhouse.sqlcipher_ext import SqlCipherDatabase
+import os
 
 
 def login():
-    p1 = getpass.getpass("Enter master password, %s\n" % getpass.getuser())
-    db.init('passwords.db', passphrase=p1)
-    Service.create_table(fail_silently=True)
+    countdown = 0
+    while countdown < 3:
+        try:
+            p1 = getpass.getpass(
+                "Enter master password, %s\n" % getpass.getuser())
+            db.init('passwords.db', passphrase=p1)
+            Service.create_table(fail_silently=True)
+            break
+
+        except DatabaseError:
+            print("\nWrong password! Try again.\n")
+            print(str(2 - countdown) + " chance(s) left!\n")
+
+        countdown += 1
+    if countdown == 3:
+        print("Potential threat, Database deleted.")
+        os.remove('./passwords.db')
+        exit()
 
 
 def get_hexdigest(salt, password):
