@@ -1,23 +1,28 @@
-import React, { Component } from "react"; // import from react
+import React, { Component } from "react";
 
-import { render, Window, App, Box, Button, TextInput } from "proton-native"; // import the proton-native components
+import { Form, Menu, Dialog, Separator ,Box, render, Window, App, Grid, Button, TextInput } from "proton-native";
 
-class PasswordManager extends Component {
-	render() { // all Components must have a render method
+class Example extends Component {
+	render() {
 		return (
-			<App> // you must always include App around everything
-			<Window title="Proton Native" size={{w: 500, h: 500}}>
-			// all your other components go here
-				<Box>
+			<App>
+				<Window title="Example" size={{w: 500, h: 500}}>
 					
-					<TextInput />
-					<Button>Enter</Button>
-					<Button>Exit</Button>
-				</Box>
-			</Window>
+					<Grid padded={true}>
+						<Form padded={true} row={0} column={0}>
+							<TextInput label="Username" />
+							<TextInput label="Password" secure={true} />
+						</Form>
+						<Separator/>
+						<Button row={0} column={3}>
+							SUBMIT
+						</Button>
+					</Grid>
+					
+				</Window>
 			</App>
 		);
 	}
 }
 
-render(<PasswordManager />); // and finally render your main component
+render(<Example />);
