@@ -11,7 +11,7 @@ def login():
     countdown = 0
     while countdown < 3:
         try:
-            p1 = getpass.getpass(
+            p1 = input(
                 "Enter master password, %s\n" % getpass.getuser())
             db.init('passwords.db', passphrase=p1)
             Service.create_table(fail_silently=True)
@@ -78,8 +78,8 @@ class Service(Model):
 
 def add_entry():
     """Add entry"""
-    serv = raw_input("\nService name\n\n")
-    masterpass = raw_input("\nPassword\n\n")
+    serv = input("\nService name\n\n")
+    masterpass = input("\nPassword\n\n")
     Service.create(name=serv, savedpassword=masterpass)
     print("\n\n Successful\n\n")
 
@@ -88,16 +88,16 @@ def edit_entry():
     """Edit entry"""
     print("\nu) update entry")
     print("\nd) delete entry")
-    action = raw_input("\nChoice?\n\n")
+    action = input("\nChoice?\n\n")
     if action == "u":
-        action2 = raw_input("\nEntry to update\n\n")
+        action2 = input("\nEntry to update\n\n")
         temp = Service.get(Service.name == action2)
-        action3 = raw_input("\nType updated name\n\n")
+        action3 = input("\nType updated name\n\n")
         temp.name = action3
         temp.save()
         print("\n\n Successful\n\n")
     elif action == "d":
-        action2 = raw_input("\nEntry to delete\n\n")
+        action2 = input("\nEntry to delete\n\n")
         temp = Service.get(Service.name == action2)
         temp.delete_instance()
         print("\n\n Successful\n\n")
@@ -107,16 +107,16 @@ def update_password():
     """Update password, user-based/automated"""
     print("\nu) update password")
     print("\ng) generate new password")
-    action = raw_input("\nChoice?\n\n")
+    action = input("\nChoice?\n\n")
     if action == "u":
-        action2 = raw_input("\nEntry to update password of\n\n")
+        action2 = input("\nEntry to update password of\n\n")
         temp = Service.get(Service.name == action2)
-        action3 = raw_input("\nType updated paswword\n\n")
+        action3 = input("\nType updated paswword\n\n")
         temp.savedpassword = action3
         temp.save()
         print("\n\n Successful\n\n")
     elif action == "g":
-        action2 = raw_input("\nEntry to update password of\n\n")
+        action2 = input("\nEntry to update password of\n\n")
         temp = Service.get(Service.name == action2)
         action3 = generate(action2)
         print("\nGenerated password : {}".format(action3))
@@ -127,9 +127,9 @@ def update_password():
 
 def view_entry():
     """View previous entries"""
-    action = raw_input("\nPress w to print whole database else Enter\n\n")
+    action = input("\nPress w to print whole database else Enter\n\n")
     if action != "w":
-        action2 = raw_input("\nEntry to view\n\n")
+        action2 = input("\nEntry to view\n\n")
         temp = Service.get(Service.name == action2)
         print("\nNAME:", temp.name, "PASSWORD:", temp.savedpassword)
     elif action == "w":
@@ -143,7 +143,7 @@ def menu_loop():
         print("\n\n\n")
         for key, value in menu.items():
             print("\n%s) %s" % (key, value.__doc__))
-        choice = raw_input("\n==>Action: \n\nPress q to quit\n\n")
+        choice = input("\n==>Action: \n\nPress q to quit\n\n")
         if choice in menu:
             menu[choice]()
 
