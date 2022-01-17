@@ -1,11 +1,8 @@
 # Zookeeper
-A basic GUI password manager running on python3.5 and using QT5 for the windows platform
+A simple GUI password manager in Python 3.5 using QT5 for the Windows & Linux platform.
 
 ## Features:
-- Stores the master password using sha3_256
-- Can store any number of website/application passwords with AES256
-- Has a password generator that can use any combination of letters, numbers, and symbols
-- Automatically hides itself on the system tray when minimized
-
-### Credits:
-Icon made by https://www.flaticon.com/authors/maxim-basinski from www.flaticon.com 
+- stores the master password using SHA3_256
+- passwords stored are encrypted with AES256
+- has a strong password generator which uses combination of letters, numbers, and symbols
+- automatically hides itself on the system tray when minimized
